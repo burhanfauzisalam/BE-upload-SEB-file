@@ -34,12 +34,12 @@ exports.sebUpload = async (req, res) => {
 
 exports.sebDelete = async (req, res) => {
   try {
-    const filename = req.query.url;
-    const isFileExist = sebFileModel.findOne({ filename });
+    const url = req.query.url;
+    const isFileExist = sebFileModel.findOne({ url });
     if (!isFileExist) {
       return res.status(400).json({ message: "File dosen't exist." });
     }
-    await sebFileModel.deleteOne({ filename });
+    await sebFileModel.deleteOne({ url });
     res.status(200).json({ message: "File deleted" });
   } catch (error) {
     res.status(500).json(error);
