@@ -13,6 +13,8 @@ router.delete("/seb", sebFile.sebDelete);
 //user routes
 router.get("/user", user.allUser);
 router.post("/user", user.addUser);
+router.post("/login", user.userLogin);
+router.post("/decode", user.userDecode);
 
 //teacher routes
 router.get("/teacher", teacher.detailTeacher);
