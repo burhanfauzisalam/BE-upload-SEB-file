@@ -70,7 +70,7 @@ exports.userLogin = async (req, res) => {
       return res.status(400).json({ message: "user nor found" });
     }
     const token = jwt.sign({ user }, process.env["KEY"], {
-      expiresIn: "1h",
+      expiresIn: "1m",
     });
     res.status(200).json(token);
   } catch (error) {

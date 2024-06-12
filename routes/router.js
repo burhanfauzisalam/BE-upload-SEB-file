@@ -9,8 +9,8 @@ const auth = require("../middlewares/loginMiddleware.js");
 const router = express.Router();
 
 //seb file routes
-router.get("/seb", sebFile.sebList);
-router.post("/seb", sebFile.sebUpload);
+router.get("/seb", auth, sebFile.sebList);
+router.post("/seb", auth, sebFile.sebUpload);
 router.delete("/seb", sebFile.sebDelete);
 
 //user routes
