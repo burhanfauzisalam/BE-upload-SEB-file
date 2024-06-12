@@ -80,7 +80,7 @@ exports.userLogin = async (req, res) => {
 
 exports.userDecode = async (req, res) => {
   try {
-    const token = req.body.token;
+    const token = req.headers.token;
     const decoded = jwt.verify(token, process.env["KEY"]);
     res.status(200).json(decoded.user);
   } catch (error) {

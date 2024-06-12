@@ -2,6 +2,9 @@ const express = require("express");
 const sebFile = require("../controllers/sebController.js");
 const user = require("../controllers/userController.js");
 const teacher = require("../controllers/teacherController.js");
+const student = require("../controllers/studentController.js");
+
+const auth = require("../middlewares/loginMiddleware.js");
 
 const router = express.Router();
 
@@ -14,9 +17,12 @@ router.delete("/seb", sebFile.sebDelete);
 router.get("/user", user.allUser);
 router.post("/user", user.addUser);
 router.post("/login", user.userLogin);
-router.post("/decode", user.userDecode);
+router.post("/decode", auth, user.userDecode);
 
 //teacher routes
-router.get("/teacher", teacher.detailTeacher);
+router.get("/teacher", auth, teacher.detailTeacher);
+
+//student routes
+router.get("/student", student.studentDetail);
 
 module.exports = router;
