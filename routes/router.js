@@ -14,7 +14,7 @@ router.post("/seb", auth, sebFile.sebUpload);
 router.delete("/seb", sebFile.sebDelete);
 
 //user routes
-router.get("/user", user.allUser);
+router.get("/user", auth, user.allUser);
 router.post("/user", user.addUser);
 router.post("/login", user.userLogin);
 router.post("/decode", auth, user.userDecode);
@@ -23,6 +23,6 @@ router.post("/decode", auth, user.userDecode);
 router.get("/teacher", auth, teacher.detailTeacher);
 
 //student routes
-router.get("/student", student.studentDetail);
+router.get("/student", auth, student.studentDetail);
 
 module.exports = router;
