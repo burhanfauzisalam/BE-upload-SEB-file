@@ -1,23 +1,15 @@
 const mongoose = require("mongoose");
 
-const studentSchema = new mongoose.Schema({
+const parentSchema = new mongoose.Schema({
   userID: {
     type: String,
     require: true,
     unique: true,
   },
-  parentID: {
-    type: String,
-    require: true,
-  },
   name: {
     type: String,
     require: true,
     unique: true,
-  },
-  grade: {
-    type: Number,
-    default: 0,
   },
   username: {
     type: String,
@@ -34,4 +26,4 @@ const studentSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Student", studentSchema);
+module.exports = mongoose.model("Parent", parentSchema);

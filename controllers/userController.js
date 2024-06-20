@@ -1,6 +1,7 @@
 const userModel = require("../models/userModel.js");
 const teacherModel = require("../models/teacherModel.js");
 const studentModel = require("../models/studentModel.js");
+const parentModel = require("../models/parentModel.js");
 const jwt = require("jsonwebtoken");
 
 require("dotenv").config();
@@ -21,7 +22,7 @@ exports.addUser = async (req, res) => {
     if (user) {
       return res.status(400).json({ message: "user already exist." });
     }
-    const userAvailable = ["teacher", "student", "admin"];
+    const userAvailable = ["teacher", "student", "admin", "parent"];
     const cekRole = userAvailable.includes(role);
     if (!cekRole) {
       return res.status(401).json({ message: "role undefined" });
@@ -31,14 +32,12 @@ exports.addUser = async (req, res) => {
 
     const userRole = addUser.role;
 
+    const data = { name, username, password, role };
     if (userRole === "teacher") {
       const userID = addUser._id;
       const addTeacher = teacherModel({
         userID,
-        name,
-        username,
-        password,
-        role,
+        ...data,
       });
       await addTeacher.save();
       res.status(201).json(addTeacher);
@@ -47,13 +46,19 @@ exports.addUser = async (req, res) => {
       const userID = addUser._id;
       const addStudent = studentModel({
         userID,
-        name,
-        username,
-        password,
-        role,
+        ...data,
       });
       await addStudent.save();
       res.status(201).json(addStudent);
+    }
+    if (userRole === "parent") {
+      const userID = addUser._id;
+      const addParent = parentModel({
+        userID,
+        ...data,
+      });
+      await addParent.save();
+      res.status(201).json(addParent);
     }
   } catch (error) {
     res.status(500).json(error);
@@ -63,13 +68,24 @@ exports.addUser = async (req, res) => {
 exports.userLogin = async (req, res) => {
   try {
     const { username, password } = req.body;
-    const user = await userModel
-      .findOne({ username, password })
-      .select("-password");
+    const user = await userModel.findOne({ username, password });
     if (!user) {
-      return res.status(400).json({ message: "user nor found" });
+      return res.status(400).json({ message: "user not found" });
     }
-    const token = jwt.sign({ user }, process.env["KEY"], {
+    // const role = user.role;
+    // let userLogin = null;
+    // if (role === "teacher") {
+    //   userLogin = await teacherModel
+    //     .findOne({ userID: user._id })
+    //     .select("-password");
+    // }
+    // if (role === "student") {
+    //   userLogin = await studentModel
+    //     .findOne({ userID: user._id })
+    //     .select("-password");
+    // }
+    const id = user._id;
+    const token = jwt.sign({ id, role: user.role }, process.env["KEY"], {
       expiresIn: "1h",
     });
     res.status(200).json(token);
@@ -82,7 +98,7 @@ exports.userDecode = async (req, res) => {
   try {
     const token = req.headers.token;
     const decoded = jwt.verify(token, process.env["KEY"]);
-    res.status(200).json(decoded.user);
+    res.status(200).json(decoded);
   } catch (error) {
     res.status(500).json(error);
   }

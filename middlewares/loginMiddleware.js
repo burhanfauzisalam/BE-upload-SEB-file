@@ -20,6 +20,8 @@ const cekToken = async (req, res, next) => {
     }
 
     // Continue to the next middleware or route
+    req.userID = decoded.id;
+    req.role = decoded.role;
     next();
   });
 };

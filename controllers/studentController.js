@@ -2,9 +2,10 @@ const studentModel = require("../models/studentModel.js");
 
 exports.studentDetail = async (req, res) => {
   try {
+    const userID = req.userID;
     const student = await studentModel
-      .findOne({ userID: req.query.id })
-      .select("-password");
+      .findOne({ userID })
+      .select("-password -_id -userID");
     if (!student) {
       return res.status(400).json({ message: "student not found" });
     }

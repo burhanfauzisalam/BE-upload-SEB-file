@@ -1,4 +1,5 @@
 const sebFileModel = require("../models/sebModel.js");
+const teacherModel = require("../models/teacherModel.js");
 
 exports.sebList = async (req, res) => {
   try {
@@ -12,18 +13,16 @@ exports.sebList = async (req, res) => {
 
 exports.sebUpload = async (req, res) => {
   try {
-    const { filename, url, grade, subject, assessment, teacher } = req.body;
+    const userID = req.userID;
+    const teacher = await teacherModel.findOne({ userID });
+    const { filename, url, grade, subject, assessment } = req.body;
     const existingFile = await sebFileModel.findOne({ filename });
     if (existingFile) {
       return res.status(400).json({ error: "File already exist." });
     }
     const newFile = sebFileModel({
-      filename,
-      url,
-      grade,
-      subject,
-      assessment,
-      teacher,
+      ...req.body,
+      teacher: teacher.name,
     });
     await newFile.save();
     res.status(201).json(newFile);
