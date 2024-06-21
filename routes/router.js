@@ -5,13 +5,15 @@ const teacher = require("../controllers/teacherController.js");
 const student = require("../controllers/studentController.js");
 
 const auth = require("../middlewares/loginMiddleware.js");
+const authStudent = require("../middlewares/studentMiddleware.js");
+const combineMiddlewares = require("../middlewares/combineMiddleware.js");
 
 const router = express.Router();
 
 //seb file routes
 router.get("/seb", auth, sebFile.sebList);
 router.post("/seb", auth, sebFile.sebUpload);
-router.delete("/seb", sebFile.sebDelete);
+router.delete("/seb", auth, sebFile.sebDelete);
 
 //user routes
 router.get("/user", auth, user.allUser);
@@ -23,6 +25,13 @@ router.post("/decode", auth, user.userDecode);
 router.get("/teacher", auth, teacher.detailTeacher);
 
 //student routes
-router.get("/student", auth, student.studentDetail);
+router.get("/students", auth, student.listStudent);
+router.get(
+  "/student",
+  combineMiddlewares(auth, authStudent),
+  student.studentDetail
+);
+router.post("/student", auth, student.addStudent);
+router.post("/login-student", student.studentLogin);
 
 module.exports = router;

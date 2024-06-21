@@ -22,7 +22,7 @@ exports.addUser = async (req, res) => {
     if (user) {
       return res.status(400).json({ message: "user already exist." });
     }
-    const userAvailable = ["teacher", "student", "admin", "parent"];
+    const userAvailable = ["teacher", "admin", "parent"];
     const cekRole = userAvailable.includes(role);
     if (!cekRole) {
       return res.status(401).json({ message: "role undefined" });
@@ -41,15 +41,6 @@ exports.addUser = async (req, res) => {
       });
       await addTeacher.save();
       res.status(201).json(addTeacher);
-    }
-    if (userRole === "student") {
-      const userID = addUser._id;
-      const addStudent = studentModel({
-        userID,
-        ...data,
-      });
-      await addStudent.save();
-      res.status(201).json(addStudent);
     }
     if (userRole === "parent") {
       const userID = addUser._id;

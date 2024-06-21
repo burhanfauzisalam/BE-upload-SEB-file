@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const cekToken = async (req, res, next) => {
+const studentToken = async (req, res, next) => {
   const token = req.headers.token;
   if (!token) {
     return res
@@ -23,4 +23,4 @@ const cekToken = async (req, res, next) => {
   });
 };
 
-module.exports = cekToken;
+module.exports = studentToken;

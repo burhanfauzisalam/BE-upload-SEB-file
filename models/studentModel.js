@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 
 const studentSchema = new mongoose.Schema({
-  userID: {
-    type: String,
-    require: true,
-    unique: true,
-  },
   parentID: {
     type: String,
     require: true,
@@ -31,6 +26,22 @@ const studentSchema = new mongoose.Schema({
   role: {
     type: String,
     require: true,
+  },
+  nisn: {
+    type: String,
+    default: "",
+  },
+  nis: {
+    type: String,
+    default: "",
+  },
+  email: {
+    type: String,
+    default: "",
+  },
+  whatsapp: {
+    type: Number,
+    default: 0,
   },
 });
 
