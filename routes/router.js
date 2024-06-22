@@ -37,5 +37,6 @@ router.post("/login-student", student.studentLogin);
 
 //parent route
 router.get("/parents", parent.listParents);
+router.get("/parent", auth, parent.detailParent);
 
 module.exports = router;
