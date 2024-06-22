@@ -3,6 +3,7 @@ const sebFile = require("../controllers/sebController.js");
 const user = require("../controllers/userController.js");
 const teacher = require("../controllers/teacherController.js");
 const student = require("../controllers/studentController.js");
+const parent = require("../controllers/parentController.js");
 
 const auth = require("../middlewares/loginMiddleware.js");
 const authStudent = require("../middlewares/studentMiddleware.js");
@@ -33,5 +34,8 @@ router.get(
 );
 router.post("/student", auth, student.addStudent);
 router.post("/login-student", student.studentLogin);
+
+//parent route
+router.get("/parents", parent.listParents);
 
 module.exports = router;
