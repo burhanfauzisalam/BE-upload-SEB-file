@@ -12,7 +12,7 @@ const combineMiddlewares = require("../middlewares/combineMiddleware.js");
 const router = express.Router();
 
 //seb file routes
-router.get("/seb", auth, sebFile.sebList);
+router.get("/seb", combineMiddlewares(auth, authStudent), sebFile.sebList);
 router.post("/seb", auth, sebFile.sebUpload);
 router.delete("/seb", auth, sebFile.sebDelete);
 
