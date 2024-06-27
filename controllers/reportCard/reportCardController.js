@@ -43,6 +43,9 @@ exports.addRubric = async (req, res) => {
 exports.transformData = async (req, res) => {
   try {
     const data = await reportCardModel.findOne({ studentID: req.query.id });
+    if (!data) {
+      return res.status(400).json({ message: "data not found" });
+    }
     const transformedData = data.rubrics.reduce(
       (acc, rubric) => {
         acc.item.push(rubric.item);
