@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 
 require("dotenv").config();
 const router = require("./routes/router");
+const routerReportCard = require("./routes/reportCardRouter");
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api", router);
+app.use("/api/report-card", routerReportCard);
 
 app.listen(port, () => {
   console.log(`Service is online on port ${port}`);
