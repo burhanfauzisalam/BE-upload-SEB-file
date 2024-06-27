@@ -42,7 +42,10 @@ exports.addRubric = async (req, res) => {
 
 exports.transformData = async (req, res) => {
   try {
-    const data = await reportCardModel.findOne({ studentID: req.query.id });
+    const data = await reportCardModel.findOne({
+      studentID: req.query.sid,
+      _id: req.query.id,
+    });
     if (!data) {
       return res.status(400).json({ message: "data not found" });
     }
