@@ -73,8 +73,7 @@ exports.editValue = async (req, res) => {
       subject,
     });
 
-    update.rubrics.length = 0;
-    update.rubrics.push(updatedData);
+    update.rubrics = updatedData;
     await update.save();
     // const filterUptade = update.rubrics.filter(
     //   (item) => item.item === updatedData.item
