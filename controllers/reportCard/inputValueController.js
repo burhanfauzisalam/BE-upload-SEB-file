@@ -73,10 +73,7 @@ exports.editValue = async (req, res) => {
       subject,
     });
 
-    const rubricIndex = update.rubrics.findIndex(
-      (r) => r.item === updatedData.item
-    );
-    update.rubrics.splice(rubricIndex, 0);
+    update.rubrics.length = 0;
     update.rubrics.push(updatedData);
     await update.save();
     // const filterUptade = update.rubrics.filter(
