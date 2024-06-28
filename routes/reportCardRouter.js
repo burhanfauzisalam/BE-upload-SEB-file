@@ -7,5 +7,6 @@ router.post("/input", inputValue.addData);
 router.post("/data", inputValue.getData);
 router.get("/data-input", inputValue.listData);
 router.post("/add-rubric", inputValue.addRubric);
+router.patch("/input-value", inputValue.editValue);
 
 module.exports = router;

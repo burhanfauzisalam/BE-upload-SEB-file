@@ -64,6 +64,23 @@ exports.getData = async (req, res) => {
   }
 };
 
+exports.editValue = async (req, res) => {
+  try {
+    const { studentID, schoolYear, subject, updatedData } = req.body;
+    const update = await inputModel.findOneAndUpdate(
+      {
+        studentID,
+        schoolYear,
+        subject,
+      },
+      updatedData,
+      { new: true }
+    );
+    res.status(200).json(update);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
 // exports.transformData = async (req, res) => {
 //   try {
 //     const data = await reportCardModel.findOne({
