@@ -67,15 +67,12 @@ exports.getData = async (req, res) => {
 exports.editValue = async (req, res) => {
   try {
     const { studentID, schoolYear, subject, updatedData } = req.body;
-    const update = await inputModel.findOneAndUpdate(
-      {
-        studentID,
-        schoolYear,
-        subject,
-      },
-      updatedData,
-      { new: true }
-    );
+    const update = await inputModel.findOne({
+      studentID,
+      schoolYear,
+      subject,
+    });
+    update.rubrics.push(updatedData);
     res.status(200).json(update);
   } catch (error) {
     res.status(500).json(error);
