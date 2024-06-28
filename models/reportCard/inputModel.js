@@ -7,11 +7,11 @@ const inputValue = new mongoose.Schema({
   },
   semester1: {
     type: [Number],
-    default: Array(20).fill(0),
+    default: Array(20).fill(null),
   },
   semester2: {
     type: [Number],
-    default: Array(20).fill(0),
+    default: Array(20).fill(null),
   },
 });
 const inputModel = new mongoose.Schema({

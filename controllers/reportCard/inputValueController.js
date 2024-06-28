@@ -52,8 +52,9 @@ exports.addRubric = async (req, res) => {
 
 exports.getData = async (req, res) => {
   try {
-    const id = req.query.id;
-    const data = await inputModel.findOne({ studentID: id });
+    const { studentID, schoolYear, subject } = req.body;
+
+    const data = await inputModel.findOne({ studentID, schoolYear, subject });
     if (!data) {
       return res.status(400).json({ message: "data not found" });
     }
