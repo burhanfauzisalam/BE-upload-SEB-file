@@ -3,6 +3,7 @@ const reportCard = require("../controllers/reportCard/reportCardController");
 const router = express.Router();
 
 router.get("/data", reportCard.getAllData);
+router.get("/report-data", reportCard.getData);
 router.post("/data", reportCard.addData);
 router.post("/add-rubric", reportCard.addRubric);
 router.get("/transform", reportCard.transformData);

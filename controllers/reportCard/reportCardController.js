@@ -4,7 +4,19 @@ exports.getAllData = async (req, res) => {
   try {
     const data = await reportCardModel.find();
     if (data.length === 0) {
-      res.status(200).json({ message: "data empty" });
+      return res.status(400).json({ message: "data empty" });
+    }
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+exports.getData = async (req, res) => {
+  try {
+    const data = await reportCardModel.findOne({ studentID: req.query.id });
+    if (!data) {
+      return res.status(400).json({ message: "data not found" });
     }
     res.status(200).json(data);
   } catch (error) {
