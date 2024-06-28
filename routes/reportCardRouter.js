@@ -1,11 +1,10 @@
 const express = require("express");
-const reportCard = require("../controllers/reportCard/reportCardController");
+const inputValue = require("../controllers/reportCard/inputValueController");
 const router = express.Router();
 
-router.get("/data", reportCard.getAllData);
-router.get("/report-data", reportCard.getData);
-router.post("/data", reportCard.addData);
-router.post("/add-rubric", reportCard.addRubric);
-router.get("/transform", reportCard.transformData);
+//
+router.post("/input", inputValue.addData);
+router.get("/data-input", inputValue.listData);
+router.post("/add-rubric", inputValue.addRubric);
 
 module.exports = router;
