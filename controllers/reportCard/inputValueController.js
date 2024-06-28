@@ -58,7 +58,7 @@ exports.getData = async (req, res) => {
     if (!data) {
       return res.status(400).json({ message: "data not found" });
     }
-    res.status(200).json(data);
+    res.status(200).json({ data, jumlah: data.rubrics.length });
   } catch (error) {
     res.status(500).json(error);
   }
@@ -72,7 +72,17 @@ exports.editValue = async (req, res) => {
       schoolYear,
       subject,
     });
+
+    const rubricIndex = update.rubrics.findIndex(
+      (r) => r.item === updatedData.item
+    );
+    update.rubrics.splice(rubricIndex, 0);
     update.rubrics.push(updatedData);
+    await update.save();
+    // const filterUptade = update.rubrics.filter(
+    //   (item) => item.item === updatedData.item
+    // );
+
     res.status(200).json(update);
   } catch (error) {
     res.status(500).json(error);
