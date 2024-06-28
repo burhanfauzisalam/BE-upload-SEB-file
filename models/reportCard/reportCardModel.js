@@ -13,7 +13,7 @@ const reportCardSchema = new mongoose.Schema({
   },
   subject: {
     type: String,
-    require: true,
+    default: 0,
   },
   teacher: {
     type: String,

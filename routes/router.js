@@ -17,7 +17,7 @@ router.post("/seb", auth, sebFile.sebUpload);
 router.delete("/seb", auth, sebFile.sebDelete);
 
 //user routes
-router.get("/user", auth, user.allUser);
+router.get("/user", user.allUser);
 router.post("/user", user.addUser);
 router.post("/login", user.userLogin);
 router.post("/decode", auth, user.userDecode);
