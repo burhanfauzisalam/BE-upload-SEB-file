@@ -50,6 +50,19 @@ exports.addRubric = async (req, res) => {
   }
 };
 
+exports.getData = async (req, res) => {
+  try {
+    const { id } = req.query.id;
+    const data = await inputModel.findOne({ studentID: id });
+    if (!data) {
+      return res.status(400).json({ message: "data not found" });
+    }
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
 // exports.transformData = async (req, res) => {
 //   try {
 //     const data = await reportCardModel.findOne({
