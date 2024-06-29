@@ -14,6 +14,24 @@ exports.listStudent = async (req, res) => {
   }
 };
 
+exports.listStudentByGrade = async (req, res) => {
+  try {
+    const grade = req.query.grade;
+    const students = await studentModel.find({ grade });
+    res.status(200).json(students);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+exports.allStudent = async (req, res) => {
+  try {
+    const students = await studentModel.find();
+    res.status(200).json(students);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
 exports.studentDetail = async (req, res) => {
   try {
     let student = null;

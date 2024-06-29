@@ -27,6 +27,8 @@ router.get("/teacher", auth, teacher.detailTeacher);
 
 //student routes
 router.get("/students", auth, student.listStudent);
+router.get("/students-by-grade", student.listStudentByGrade);
+router.get("/all-students", student.allStudent);
 router.get(
   "/student",
   combineMiddlewares(auth, authStudent),
