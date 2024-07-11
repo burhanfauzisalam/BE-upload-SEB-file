@@ -4,6 +4,7 @@ const user = require("../controllers/userController.js");
 const teacher = require("../controllers/teacherController.js");
 const student = require("../controllers/studentController.js");
 const parent = require("../controllers/parentController.js");
+const subject = require("../controllers/subjectController.js");
 
 const auth = require("../middlewares/loginMiddleware.js");
 const authStudent = require("../middlewares/studentMiddleware.js");
@@ -40,5 +41,9 @@ router.post("/login-student", student.studentLogin);
 //parent route
 router.get("/parents", parent.listParents);
 router.get("/parent", auth, parent.detailParent);
+
+//
+router.get("/subjects", subject.allSubject);
+router.post("/subject", subject.addSubject);
 
 module.exports = router;
