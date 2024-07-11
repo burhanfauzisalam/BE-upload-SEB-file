@@ -24,7 +24,7 @@ exports.addSubject = async (req, res) => {
     if (cekData) {
       return res.status(401).json({ message: "subject already exist" });
     }
-    const newData = await subjectModel({ subject, schoolYear, teacher });
+    const newData = await subjectModel({ subject, schoolYear, teacher, grade });
     await newData.save();
     res.status(201).json(newData);
   } catch (error) {
