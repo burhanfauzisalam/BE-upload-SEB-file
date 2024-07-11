@@ -30,3 +30,12 @@ exports.addSubject = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
+exports.deleteSubject = async (req, res) => {
+  try {
+    const deletedData = await subjectModel.findByIdAndDelete(req.query.id);
+    res.status(200).json({ message: "Subject deleted" });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};

@@ -45,5 +45,6 @@ router.get("/parent", auth, parent.detailParent);
 //
 router.get("/subjects", subject.allSubject);
 router.post("/subject", subject.addSubject);
+router.delete("/subject", subject.deleteSubject);
 
 module.exports = router;
