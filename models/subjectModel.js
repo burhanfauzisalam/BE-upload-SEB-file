@@ -13,6 +13,10 @@ const subjectSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  grade: {
+    type: Number,
+    require: true,
+  },
   students: {
     type: Array,
     default: () => [],

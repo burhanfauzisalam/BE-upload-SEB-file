@@ -14,11 +14,12 @@ exports.allSubject = async (req, res) => {
 
 exports.addSubject = async (req, res) => {
   try {
-    const { subject, schoolYear, teacher } = req.body;
+    const { subject, schoolYear, teacher, grade } = req.body;
     const cekData = await subjectModel.findOne({
       subject,
       schoolYear,
       teacher,
+      grade,
     });
     if (cekData) {
       return res.status(401).json({ message: "subject already exist" });
