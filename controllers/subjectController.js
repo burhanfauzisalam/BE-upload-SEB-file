@@ -2,7 +2,7 @@ const subjectModel = require("../models/subjectModel.js");
 
 exports.allSubject = async (req, res) => {
   try {
-    const data = await subjectModel.find();
+    const data = await subjectModel.find().sort({ subject: 1 });
     if (!data || data.length === 0) {
       return res.status(400).json({ message: "no data found" });
     }
