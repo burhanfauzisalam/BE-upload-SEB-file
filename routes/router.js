@@ -44,6 +44,7 @@ router.get("/parent", auth, parent.detailParent);
 
 //
 router.get("/subjects", subject.allSubject);
+router.get("/subject", subject.detailSubject);
 router.post("/subject", subject.addSubject);
 router.delete("/subject", subject.deleteSubject);
 
