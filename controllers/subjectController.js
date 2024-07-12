@@ -12,6 +12,19 @@ exports.allSubject = async (req, res) => {
   }
 };
 
+exports.detailSubject = async (req, res) => {
+  try {
+    const { subject, teacher, schoolYear } = req.query;
+    const data = await subjectModel.findOne({ subject, teacher, schoolYear });
+    if (!data) {
+      return res.status(400).json({ message: "data not found" });
+    }
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
 exports.addSubject = async (req, res) => {
   try {
     const { subject, schoolYear, teacher, grade } = req.body;
